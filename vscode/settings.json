@@ -1,0 +1,196 @@
+{
+	// Disable telementry.
+	"telemetry.telemetryLevel": "off",
+
+	// Exclude files.
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.DS_Store": true,
+		"**/node_modules": true,
+	},
+	"security.workspace.trust.untrustedFiles": "open",
+
+	// UI: Minimal.
+	"workbench.activityBar.visible": false,
+	"workbench.startupEditor": "none",
+	"workbench.statusBar.visible": false,
+	"editor.minimap.enabled": false,
+	"editor.lineNumbers": "off",
+	"editor.matchBrackets": "near",
+	// "editor.folding": false,
+	"editor.renderLineHighlight": "none",
+	"breadcrumbs.filePath": "off",
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+	"breadcrumbs.enabled": false,
+
+	// UI: Sidebar.
+	"workbench.sideBar.location": "right",
+	"workbench.tree.indent": 16,
+
+	// Terminal.
+	"terminal.integrated.profiles.osx": {
+		"zsh": {
+			"path": "zsh",
+			"args": [
+				"-l"
+			]
+		}
+	},
+	"terminal.integrated.defaultProfile.osx": "zsh",
+
+	// Editor: save.
+	"files.autoSave": "onFocusChange",
+	"files.trimTrailingWhitespace": true,
+
+	// Editor: font.
+	"editor.fontFamily": "'Source Code Pro', 'Jetbrains Mono', Menlo, Monaco, 'Courier New', monospace",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 14,
+	"editor.lineHeight": 1.4,
+
+	// Editor: select words.
+	"editor.wordSeparators": "`~!@%^&*()=+[{]}\\|;:'\",.<>/?",
+
+	// Format.
+	"files.eol": "\n",
+	"editor.insertSpaces": false,
+	"editor.showUnused": true,
+	"editor.formatOnType": true,
+
+	// Format: PHP.
+	"[php]": {
+		"editor.defaultFormatter": "wongjn.php-sniffer"
+	},
+	"phpSniffer.standard": "/Users/rilwis/elightup/dotfiles/phpcs.xml",
+	"phpSniffer.run": "onType",
+
+	// Format: SCSS.
+	"[scss]": {
+		"editor.defaultFormatter": "HookyQR.beautify"
+	},
+	"beautify.config": {
+		"indent_with_tabs": true
+	},
+
+	// Format: JavaScript, Typescript, JSON, JSX.
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"source.organizeImports": true,
+	},
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"javascript.validate.enable": false,
+	"[javascript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features",
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+	},
+	"javascript.suggest.autoImports": true,
+	"javascript.suggestionActions.enabled": true,
+	"javascript.format.semicolons": "insert",
+	"javascript.format.insertSpaceAfterCommaDelimiter": true,
+	"javascript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+	"javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+
+	// Git.
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false, // For Windows
+	"git.ignoreMissingGitWarning": true,
+	"diffEditor.renderSideBySide": false,
+	"scm.diffDecorationsIgnoreTrimWhitespace": "true",
+
+	// Git: Gitlens.
+	"gitlens.codeLens.enabled": false,
+	"gitlens.hovers.enabled": false,
+	"gitlens.views.commits.showBranchComparison": false,
+	"gitlens.advanced.messages": {
+		"suppressCreatePullRequestPrompt": true,
+		"suppressGitMissingWarning": true
+	},
+
+	"intelephense.stubs": [
+		"apache",
+		"bcmath",
+		"bz2",
+		"calendar",
+		"com_dotnet",
+		"Core",
+		"ctype",
+		"curl",
+		"date",
+		"dba",
+		"dom",
+		"enchant",
+		"exif",
+		"FFI",
+		"fileinfo",
+		"filter",
+		"fpm",
+		"ftp",
+		"gd",
+		"gettext",
+		"gmp",
+		"hash",
+		"iconv",
+		"imap",
+		"intl",
+		"json",
+		"ldap",
+		"libxml",
+		"mbstring",
+		"meta",
+		"mysqli",
+		"oci8",
+		"odbc",
+		"openssl",
+		"pcntl",
+		"pcre",
+		"PDO",
+		"pdo_ibm",
+		"pdo_mysql",
+		"pdo_pgsql",
+		"pdo_sqlite",
+		"pgsql",
+		"Phar",
+		"posix",
+		"pspell",
+		"readline",
+		"Reflection",
+		"session",
+		"shmop",
+		"SimpleXML",
+		"snmp",
+		"soap",
+		"sockets",
+		"sodium",
+		"SPL",
+		"sqlite3",
+		"standard",
+		"superglobals",
+		"sysvmsg",
+		"sysvsem",
+		"sysvshm",
+		"tidy",
+		"tokenizer",
+		"xml",
+		"xmlreader",
+		"xmlrpc",
+		"xmlwriter",
+		"xsl",
+		"wordpress",
+		"Zend OPcache",
+		"zip",
+		"zlib"
+	],
+}

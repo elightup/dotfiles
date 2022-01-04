@@ -1,0 +1,49 @@
+[
+	// Workspace.
+	{
+		"key": "cmd+k cmd+o",
+		"command": "workbench.action.openWorkspace"
+	},
+	{
+		"key": "cmd+k cmd+s",
+		"command": "workbench.action.saveWorkspaceAs"
+	},
+	{
+		"key": "cmd+k cmd+a",
+		"command": "workbench.action.addRootFolder"
+	},
+
+	// Editor.
+	{
+		"key": "cmd+e cmd+a",
+		"command": "wwm.aligncode"
+	},
+	{
+		"key": "cmd+e cmd+t",
+		"command": "editor.action.indentationToTabs"
+	},
+
+	// Terminal.
+	{
+		"key": "cmd+t cmd+k",
+		"command": "workbench.action.terminal.kill"
+	},
+
+	// Git.
+	{
+		"key": "cmd+g cmd+l",
+		"command": "workbench.view.scm"
+	},
+	{
+		"key": "cmd+g cmd+p",
+		"command": "git.pushWithTags"
+	},
+	{
+		"key": "cmd+g cmd+u",
+		"command": "git.pull"
+	},
+	{
+		"key": "cmd+g cmd+h",
+		"command": "workbench.view.extension.github-pull-requests"
+	},
+]
