@@ -1,0 +1,11 @@
+# *.zip
+
+.DS_Store
+Thumbs.db
+
+node_modules
+
+.svn
+.idea
+*.swp
+*.lock
