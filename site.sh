@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# echo -n "Enter a domain name: "
-# read domain
-
 # The main (entry) function.
 main() {
 	checkRoot
@@ -16,7 +13,7 @@ outputMenu() {
 	echo "How can I help you?"
 	outputLine
 	echo "1. Install the system (Apache, MariaDB, PHP, Git, WP-CLI)
-2. Add a domain"
+2. Add a WordPress site"
 	outputLine
 	echo ""
 
@@ -29,7 +26,10 @@ outputMenu() {
 			backToMenu
 			;;
 		2)
-			echo "Two"
+			read -p "Enter a domain name: " domain
+			createVhost $domain
+			createDb $domain
+			backToMenu
 			;;
 		*)
 			echo "Invalid choice"
@@ -39,6 +39,7 @@ outputMenu() {
 
 # Go back to the main menu.
 backToMenu() {
+	echo ""
 	# -n: Defines the required character count to stop reading
 	# -s: Hide the user's input
 	# -r: Cause the string to be interpreted "raw" (without considering backslash escapes)
@@ -68,13 +69,16 @@ install() {
 
 	echo "  - Restarting Apache"
 	service apache2 restart
+
 	# -e: Enable interpretation of backslash escapes.
 	echo -e "\nDONE\n"
 }
 
 createVhost() {
-	echo "Creating vỉrtual host..."
-
+	domain=$1
+	echo ""
+	echo "# Creating virtual host"
+	echo "  - Adding configuration file"
 	echo "<VirtualHost *:80>
 		ServerName $domain
 		DocumentRoot /var/www/$domain
@@ -85,18 +89,25 @@ createVhost() {
 		</Directory>
 	</VirtualHost>" > "/etc/apache2/sites-available/$domain.conf"
 
-	a2ensite $domain > /dev/null
+	echo "  - Enabling the site"
+	# -q: Quiet mode.
+	a2ensite -q $domain > /dev/null
 
+	echo "  - Creating site directory"
 	mkdir -p "/var/www/$domain"
 
+	echo "  - Restarting Apache"
 	service apache2 restart
+
+	echo ""
 }
 
 createDb() {
-	echo "Creating database..."
+	domain=$1
+	echo ""
+	echo "# Creating database"
 
-	echo -n "Enter MySQL root password (optional): "
-	read root_pwd
+	read -p "  - Enter MySQL root password (optional): " root_pwd
 
 	db=${domain/./_}
 	user_pwd=$(echo $RANDOM | base64)
