@@ -39,20 +39,25 @@ outputMenu() {
 install() {
 	echo "# Installing the system"
 	echo "  - Updating the system"
+	# -qq: Don't output anything excepts errors.
 	apt-get -qq update
 
 	echo "  - Installing Apache, MariaDB, PHP, Git, WP-CLI"
+	# -y: Automatic yes to prompts.
 	apt-get install -qqy apache2 libapache2-mod-fcgid php-fpm mariadb-server mariadb-client libmysqlclient-dev php-mysql php-mysqli php-imap php-json php-gd php-curl php-mbstring php-xml php-zip mailutils unzip git
+	# -s: Silent mode, -O: write output to file
 	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
 
 	echo "  - Enabling Apache modules"
+	# -q: Quiet mode.
 	a2enmod -q rewrite expires headers proxy_fcgi setenvif
 	a2enconf -q php7.4-fpm
 
 	echo "  - Restarting Apache"
 	service apache2 restart
+	# -e: Enable interpretation of backslash escapes.
 	echo -e "\nDONE\n"
 }
 
