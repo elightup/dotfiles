@@ -18,8 +18,11 @@ outputMenu() {
 	echo "1. Install the system (Apache, MariaDB, PHP, Git, WP-CLI)
 2. Add a domain"
 	outputLine
+	echo ""
 
 	read -p "Enter a choice [1-2]: " choice
+	echo ""
+
 	case $choice in
 		1)
 			install
@@ -34,25 +37,23 @@ outputMenu() {
 }
 
 install() {
-	echo -n "Updating the system... "
-	apt-get update > /dev/null
-	echo "DONE"
+	echo "# Installing the system"
+	echo "  - Updating the system"
+	apt-get -qq update
 
-	echo "Installing Apache, MariaDB, PHP, Git, WP-CLI... "
-	apt-get install -y apache2 libapache2-mod-fcgid php-fpm mariadb-server mariadb-client libmysqlclient-dev php-mysql php-mysqli php-imap php-json php-gd php-curl php-mbstring php-xml php-zip mailutils unzip git
+	echo "  - Installing Apache, MariaDB, PHP, Git, WP-CLI"
+	apt-get install -qqy apache2 libapache2-mod-fcgid php-fpm mariadb-server mariadb-client libmysqlclient-dev php-mysql php-mysqli php-imap php-json php-gd php-curl php-mbstring php-xml php-zip mailutils unzip git
 	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
-	echo "DONE"
 
-	echo -n "Enabling Apache modules... "
-	a2enmod rewrite expires headers proxy_fcgi setenvif
-	a2enconf php7.4-fpm
-	echo "DONE"
+	echo "  - Enabling Apache modules"
+	a2enmod -q rewrite expires headers proxy_fcgi setenvif
+	a2enconf -q php7.4-fpm
 
-	echo -n "Restarting Apache... "
+	echo "  - Restarting Apache"
 	service apache2 restart
-	echo -e "DONE\n"
+	echo -e "\nDONE\n"
 }
 
 createVhost() {
