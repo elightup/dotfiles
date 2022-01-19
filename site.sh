@@ -6,13 +6,13 @@
 # The main (entry) function.
 main() {
 	checkRoot
-	clear
-	welcome
 	outputMenu
 }
 
 # Output the main menu and prompt user to select an item.
 outputMenu() {
+	clear
+	welcome
 	echo "How can I help you?"
 	outputLine
 	echo "1. Install the system (Apache, MariaDB, PHP, Git, WP-CLI)
@@ -26,6 +26,7 @@ outputMenu() {
 	case $choice in
 		1)
 			install
+			backToMenu
 			;;
 		2)
 			echo "Two"
@@ -36,6 +37,16 @@ outputMenu() {
 	esac
 }
 
+# Go back to the main menu.
+backToMenu() {
+	# -n: Defines the required character count to stop reading
+	# -s: Hide the user's input
+	# -r: Cause the string to be interpreted "raw" (without considering backslash escapes)
+	read -rsn1 -p "Press any key to go back to the main menu or Ctrl-C to exit..."
+	outputMenu
+}
+
+# Install the system: Apache, MariaDB, PHP, Git, WP-CLI.
 install() {
 	echo "# Installing the system"
 	echo "  - Updating the system"
@@ -114,7 +125,7 @@ die() {
 
 # Output the welcome message.
 welcome() {
-	echo -e "Welcome to eLightUp site script version 0.0.1.\n"
+	echo -e "Welcome to eLightUp VPS management script v0.0.1.\n"
 }
 
 # Output a horizontal line with 80 characters width.
