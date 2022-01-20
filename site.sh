@@ -13,11 +13,14 @@ outputMenu() {
 	echo "How can I help you?"
 	outputLine
 	echo "1. Install the system
-2. Add a WordPress site"
+2. Add a WordPress site
+3. Add a domain (virtual host)
+4. Create a database
+5. Quit"
 	outputLine
 	echo ""
 
-	read -p "Enter a choice [1-2]: " choice
+	read -p "Enter a choice [1-5]: " choice
 	echo ""
 
 	case $choice in
@@ -27,12 +30,34 @@ outputMenu() {
 			;;
 		2)
 			read -p "Enter a domain name: " domain
-			createVhost $domain
-			createDb $domain
+
+			# Setup variables.
+			path="/var/www/$domain"
+			db_name=${domain/./_}
+			db_pwd=$(echo $RANDOM | base64)
+			admin_pwd=$(echo $RANDOM | base64)
+			wp="wp --allow-root --path=$path --quiet"
+
+			createVhost
+			createDb
+			installWp
 			backToMenu
 			;;
-		*)
-			echo "Invalid choice"
+		3)
+			read -p "Enter a domain name: " domain
+
+			# Setup variables.
+			path="/var/www/$domain"
+
+			createVhost
+			backToMenu
+			;;
+		4)
+			read -p "Enter the database/user name: " db_name
+			read -p "Enter the user password: " db_pwd
+
+			createDb
+			backToMenu
 			;;
 	esac
 }
@@ -109,10 +134,14 @@ createVhost() {
 	a2ensite -q $domain > /dev/null
 
 	echo "  - Creating site directory"
-	mkdir -p "/var/www/$domain"
+	mkdir -p $path
 
 	echo "  - Restarting Apache"
 	service apache2 restart
+
+	echo -e "\nDONE\n"
+
+	echo "The document root directory for the domain $domain is: $path"
 }
 
 createDb() {
@@ -120,9 +149,6 @@ createDb() {
 
 	# read -p "  - Enter MySQL root password (optional): " root_pwd
 	# root_pwd=""
-
-	db_name=${domain/./_}
-	db_pwd=$(echo $RANDOM | base64)
 
 	# if [ -n $root_pwd ]
 	# then
@@ -152,11 +178,23 @@ installWp() {
 	echo -e "\n# Installing WordPress"
 
 	echo "  - Downloading WordPress"
-	wp cli core download --path="/var/www/$domain" --skip-content --force
+	$wp core download --skip-content --force
+
+	echo "  - Updating wp-config.php file"
+	mv "$path/wp-config-sample.php" "$path/wp-config.php"
+	sed -i "s/database_name_here/$db_name/" "$path/wp-config.php"
+	sed -i "s/username_here/$db_name/" "$path/wp-config.php"
+	sed -i "s/password_here/$db_pwd/" "$path/wp-config.php"
 
 	echo "  - Installing WordPress"
-	admin_pwd=$(echo $RANDOM | base64)
-	wp core install --url="$domain" --admin_user=admin --admin_password="$admin_pwd" --admin_email="admin@$domain"
+	$wp core install --url="$domain" --title="$domain" --admin_user=admin --admin_password="$admin_pwd" --admin_email="admin@$domain"
+
+	echo -e "\nDONE\n"
+
+	echo "# WordPress admin account information:"
+	echo "  - Admin URL: http://$domain/wp-admin/"
+	echo "  - Username:  admin"
+	echo "  - Password:  $admin_pwd"
 }
 
 # Output a message and die.
