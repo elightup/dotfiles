@@ -50,6 +50,7 @@ backToMenu() {
 # Install the system
 install() {
 	echo "# Installing the system"
+
 	echo "  - Updating the system"
 	# -qq: Don't output anything excepts errors.
 	apt-get -qq update
@@ -62,7 +63,7 @@ install() {
 	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev
 
 	echo "  - Installing PHP"
-	apt-get install -qqy php-fpm php-mysql php-mysqli php-imap php-json php-gd php-curl php-mbstring php-xml php-zip mailutils unzip git
+	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip
 
 	echo "  - Installing Git"
 	apt-get install -qqy git
@@ -91,6 +92,7 @@ install() {
 
 createVhost() {
 	echo -e "\n# Creating virtual host"
+
 	echo "  - Adding configuration file"
 	echo "<VirtualHost *:80>
 		ServerName $domain
@@ -147,7 +149,14 @@ createDb() {
 }
 
 installWp() {
-	echo -e "\nInstalling WordPress"
+	echo -e "\n# Installing WordPress"
+
+	echo "  - Downloading WordPress"
+	wp cli core download --path="/var/www/$domain" --skip-content --force
+
+	echo "  - Installing WordPress"
+	admin_pwd=$(echo $RANDOM | base64)
+	wp core install --url="$domain" --admin_user=admin --admin_password="$admin_pwd" --admin_email="admin@$domain"
 }
 
 # Output a message and die.
