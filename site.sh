@@ -71,7 +71,8 @@ install() {
 	apt-get install -qqy mailutils unzip
 
 	echo "  - Installing WP-CLI"
-	# -s: Silent mode, -O: write output to file
+	# -s: Silent mode.
+	# -O: Write output to file.
 	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
@@ -85,13 +86,11 @@ install() {
 	service apache2 restart
 
 	# -e: Enable interpretation of backslash escapes.
-	echo -e "\nDONE\n"
+	echo -e "\nDONE"
 }
 
 createVhost() {
-	domain=$1
-	echo ""
-	echo "# Creating virtual host"
+	echo -e "\n# Creating virtual host"
 	echo "  - Adding configuration file"
 	echo "<VirtualHost *:80>
 		ServerName $domain
@@ -112,34 +111,43 @@ createVhost() {
 
 	echo "  - Restarting Apache"
 	service apache2 restart
-
-	echo ""
 }
 
 createDb() {
-	domain=$1
-	echo ""
-	echo "# Creating database"
+	echo -e "\n# Creating database"
 
-	read -p "  - Enter MySQL root password (optional): " root_pwd
+	# read -p "  - Enter MySQL root password (optional): " root_pwd
+	# root_pwd=""
 
-	db=${domain/./_}
-	user_pwd=$(echo $RANDOM | base64)
+	db_name=${domain/./_}
+	db_pwd=$(echo $RANDOM | base64)
 
-	if [ -n $root_pwd ]
-	then
-		mysql -u root -p"$root_pwd" -e "CREATE DATABASE $db;" > /dev/null
-		mysql -u root -p"$root_pwd" -e "CREATE USER '$db'@'localhost' IDENTIFIED BY '$user_pwd';" > /dev/null
-		mysql -u root -p"$root_pwd" -e "GRANT ALL PRIVILEGES ON $db.* TO '$db'@'localhost';"
-	else
-		mysql -u root -e "CREATE DATABASE $db;" > /dev/null
-		mysql -u root -e "CREATE USER '$db'@'localhost' IDENTIFIED BY '$user_pwd';" > /dev/null
-		mysql -u root -e "GRANT ALL PRIVILEGES ON $db.* TO '$db'@'localhost';"
-	fi
+	# if [ -n $root_pwd ]
+	# then
+	# 	# -s: Silent mode.
+	# 	# -e: Execute the statement and quit.
+	# 	mysql -u root -p"$root_pwd" -s -e "CREATE DATABASE $db_name;"
+	# 	mysql -u root -p"$root_pwd" -s -e "CREATE USER '$db_name'@'localhost' IDENTIFIED BY '$db_pwd';"
+	# 	mysql -u root -p"$root_pwd" -s -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_name'@'localhost';"
+	# else
+		echo "  - Creating database"
+		mysql -u root -s -e "CREATE DATABASE $db_name;"
+		echo "  - Creating user"
+		mysql -u root -s -e "CREATE USER '$db_name'@'localhost' IDENTIFIED BY '$db_pwd';"
+		echo "  - Granting user privileges"
+		mysql -u root -s -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_name'@'localhost';"
+	# fi
+
+	echo -e "\nDONE\n"
+
+	echo "# Database information:"
+	echo "  - Database name: $db_name"
+	echo "  - Username:      $db_name"
+	echo "  - Password:      $db_pwd"
 }
 
 installWp() {
-	echo "Installing WordPress..."
+	echo -e "\nInstalling WordPress"
 }
 
 # Output a message and die.
