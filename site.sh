@@ -12,7 +12,7 @@ outputMenu() {
 	welcome
 	echo "How can I help you?"
 	outputLine
-	echo "1. Install the system (Apache, MariaDB, PHP, Git, WP-CLI)
+	echo "1. Install the system
 2. Add a WordPress site"
 	outputLine
 	echo ""
@@ -47,16 +47,30 @@ backToMenu() {
 	outputMenu
 }
 
-# Install the system: Apache, MariaDB, PHP, Git, WP-CLI.
+# Install the system
 install() {
 	echo "# Installing the system"
 	echo "  - Updating the system"
 	# -qq: Don't output anything excepts errors.
 	apt-get -qq update
 
-	echo "  - Installing Apache, MariaDB, PHP, Git, WP-CLI"
+	echo "  - Installing Apache"
 	# -y: Automatic yes to prompts.
-	apt-get install -qqy apache2 libapache2-mod-fcgid php-fpm mariadb-server mariadb-client libmysqlclient-dev php-mysql php-mysqli php-imap php-json php-gd php-curl php-mbstring php-xml php-zip mailutils unzip git
+	apt-get install -qqy apache2 libapache2-mod-fcgid
+
+	echo "  - Installing MariaDB"
+	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev
+
+	echo "  - Installing PHP"
+	apt-get install -qqy php-fpm php-mysql php-mysqli php-imap php-json php-gd php-curl php-mbstring php-xml php-zip mailutils unzip git
+
+	echo "  - Installing Git"
+	apt-get install -qqy git
+
+	echo "  - Installing mailutils and unzip"
+	apt-get install -qqy mailutils unzip
+
+	echo "  - Installing WP-CLI"
 	# -s: Silent mode, -O: write output to file
 	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
