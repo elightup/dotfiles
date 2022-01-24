@@ -15,8 +15,9 @@ outputMenu() {
 	echo "1. Install the system
 2. Add a WordPress site
 3. Add a domain (virtual host)
-4. Create a database
-5. Quit"
+4. Add a domain (virtual host) with 'public' folder
+5. Create a database
+6. Quit"
 	outputLine
 	echo ""
 
@@ -53,6 +54,15 @@ outputMenu() {
 			backToMenu
 			;;
 		4)
+			read -p "Enter a domain name: " domain
+
+			# Setup variables.
+			path="/var/www/$domain/public"
+
+			createVhost
+			backToMenu
+			;;
+		5)
 			read -p "Enter the database/user name: " db_name
 			read -p "Enter the user password: " db_pwd
 
@@ -121,9 +131,9 @@ createVhost() {
 	echo "  - Adding configuration file"
 	echo "<VirtualHost *:80>
 		ServerName $domain
-		DocumentRoot /var/www/$domain
+		DocumentRoot $path
 		LogLevel error
-		<Directory /var/www/$domain>
+		<Directory $path>
 			Options FollowSymLinks
 			AllowOverride All
 		</Directory>
