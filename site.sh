@@ -17,7 +17,8 @@ outputMenu() {
 3. Add a domain (virtual host)
 4. Add a domain (virtual host) with 'public' folder
 5. Create a database
-6. Quit"
+6. Add SSL with Let's Encrypt (Certbot)
+7. Quit"
 	outputLine
 	echo ""
 
@@ -69,6 +70,10 @@ outputMenu() {
 			createDb
 			backToMenu
 			;;
+		6)
+			certbot --apache
+			backToMenu
+			;;
 	esac
 }
 
@@ -113,6 +118,18 @@ install() {
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
 
+	echo "  - Installing Composer"
+	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+	php composer-setup.php
+	php -r "unlink('composer-setup.php');"
+	mv composer.phar /usr/local/bin/composer
+
+	echo "  - Installing Let's Encrypt (Certbot)"
+	snap install core
+	snap refresh core
+	snap install --classic certbot
+	ln -s /snap/bin/certbot /usr/bin/certbot
+
 	echo "  - Enabling Apache modules"
 	# -q: Quiet mode.
 	a2enmod -q rewrite expires headers proxy_fcgi setenvif
@@ -130,14 +147,14 @@ createVhost() {
 
 	echo "  - Adding configuration file"
 	echo "<VirtualHost *:80>
-		ServerName $domain
-		DocumentRoot $path
-		LogLevel error
-		<Directory $path>
-			Options FollowSymLinks
-			AllowOverride All
-		</Directory>
-	</VirtualHost>" > "/etc/apache2/sites-available/$domain.conf"
+	ServerName $domain
+	DocumentRoot $path
+	LogLevel error
+	<Directory $path>
+		Options FollowSymLinks
+		AllowOverride All
+	</Directory>
+</VirtualHost>" > "/etc/apache2/sites-available/$domain.conf"
 
 	echo "  - Enabling the site"
 	# -q: Quiet mode.
