@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# The VPS management script:
+# - Install LAMP with Git, WP-CLI, Composer, Let's Encrypt, mailutils and unzip
+# - Add domains (virtual host)
+# - Add SSL
+# - Add WordPress sites
+# - Create a database
+
 # The main (entry) function.
 main() {
 	checkRoot
