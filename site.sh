@@ -32,7 +32,7 @@ outputMenu() {
 	outputLine
 	echo ""
 
-	read -p "Enter a choice [1-5]: " choice
+	read -p "Enter a choice [1-7]: " choice
 	echo ""
 
 	case $choice in
@@ -113,7 +113,7 @@ install() {
 	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev
 
 	echo "  - Installing PHP"
-	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip
+	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip php-intl
 
 	echo "  - Installing Git"
 	apt-get install -qqy git
