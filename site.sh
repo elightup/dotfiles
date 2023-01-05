@@ -157,13 +157,18 @@ createVhost() {
 
 	echo "  - Adding configuration file"
 	echo "<VirtualHost *:80>
-	ServerName $domain
-	DocumentRoot $path
-	LogLevel error
-	<Directory $path>
-		Options FollowSymLinks
-		AllowOverride All
-	</Directory>
+    ServerName $domain
+    ServerAlias www.$domain
+    DocumentRoot $path
+    LogLevel error
+    <Directory $path>
+        Options FollowSymLinks
+        AllowOverride All
+    </Directory>
+
+    RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1$1 [R=301,L]
 </VirtualHost>" > "/etc/apache2/sites-available/$domain.conf"
 
 	echo "  - Enabling the site"
