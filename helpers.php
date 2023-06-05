@@ -38,3 +38,7 @@ function vl( ...$args ) {
 	}
 	error_log( ob_get_clean() );
 }
+
+function lqm( $args ) {
+	do_action( 'qm/debug', $args );
+}
