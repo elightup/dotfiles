@@ -24,15 +24,14 @@ outputMenu() {
 	outputLine
 	echo "1. Install the system
 2. Add a WordPress site
-3. Add a domain (virtual host)
-4. Add a domain (virtual host) with 'public' folder
-5. Create a database
-6. Add SSL with Let's Encrypt (Certbot)
-7. Quit"
+3. Add a domain
+4. Create a database
+5. Add SSL with Let's Encrypt (Certbot)
+6. Quit"
 	outputLine
 	echo ""
 
-	read -p "Enter a choice [1-7]: " choice
+	read -p "Enter a choice [1-6]: " choice
 	echo ""
 
 	case $choice in
@@ -65,22 +64,13 @@ outputMenu() {
 			backToMenu
 			;;
 		4)
-			read -p "Enter a domain name: " domain
-
-			# Setup variables.
-			path="/var/www/$domain/public"
-
-			createVhost
-			backToMenu
-			;;
-		5)
 			read -p "Enter the database/user name: " db_name
 			read -p "Enter the user password: " db_pwd
 
 			createDb
 			backToMenu
 			;;
-		6)
+		5)
 			certbot --apache
 			backToMenu
 			;;
