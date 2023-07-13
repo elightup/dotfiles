@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###############################################################################
-# The VPS backup script
+# The database backup script
 #
 # - Automatic backup all databases in format $database-$Y-$m-$d.sql.gz
 # - Send backups to Dropbox
@@ -9,12 +9,6 @@
 # Uses: https://github.com/andreafabrizi/Dropbox-Uploader
 # Link: https://deluxeblogtips.com/vps-backup-wordpress/
 ###############################################################################
-
-# Exit when a command fails
-set -o errexit
-
-# Fail fast and be aware of exit codes
-set -eo pipefail
 
 # The main function
 main() {
