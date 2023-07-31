@@ -102,8 +102,11 @@ install() {
 	echo "  - Installing MariaDB"
 	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev
 
+	echo "  - Installing Memcached"
+	apt-get install -qqy memcached
+
 	echo "  - Installing PHP"
-	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip php-intl
+	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip php-intl php-memcached php-memcache
 
 	echo "  - Installing Git"
 	apt-get install -qqy git
