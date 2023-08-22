@@ -1,0 +1,49 @@
+Header unset ETag
+FileETag None
+
+# Browser cache
+ExpiresActive On
+ExpiresDefault "access plus 1 year"
+ExpiresByType text/html "access plus 1 day"
+
+# Compress files
+<FilesMatch ".(js|css|html|htm|php|xml|svg)$">
+SetOutputFilter DEFLATE
+</FilesMatch>
+
+# Block User ID Phishing Requests
+<IfModule mod_rewrite.c>
+RewriteCond %{QUERY_STRING} author=([0-9]*)
+RewriteRule .* /? [L,R=302]
+</IfModule>
+
+# Disable cron
+<Files wp-cron.php>
+    Order deny,allow
+    Deny from all
+</Files>
+
+# Disable XML-RPC
+<Files xmlrpc.php">
+    Order deny,allow
+    Deny from all
+</Files>
+
+# Set headers
+Header add X-Frame-Options DENY
+Header add Access-Control-Allow-Origin "https://vin.titanweb.vn"
+
+# Disable directory browsing
+Options -Indexes
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
