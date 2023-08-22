@@ -36,6 +36,9 @@ Header add Access-Control-Allow-Origin "https://vin.titanweb.vn"
 # Disable directory browsing
 Options -Indexes
 
+# Remove server info when 403
+ErrorDocument 403 /403.html
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
