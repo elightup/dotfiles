@@ -8,13 +8,28 @@ ExpiresByType text/html "access plus 1 day"
 
 # Compress files
 <FilesMatch ".(js|css|html|htm|php|xml|svg)$">
-SetOutputFilter DEFLATE
+    SetOutputFilter DEFLATE
 </FilesMatch>
+
+# Set headers
+Header add X-Frame-Options DENY
+Header add Access-Control-Allow-Origin "https://vin.titanweb.vn"
+
+# Disable directory browsing
+Options -Indexes
+
+# Remove server info when 403
+ErrorDocument 403 /403.html
+
+# HSTS
+<IfModule mod_headers.c>
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+</IfModule>
 
 # Block User ID Phishing Requests
 <IfModule mod_rewrite.c>
-RewriteCond %{QUERY_STRING} author=([0-9]*)
-RewriteRule .* /? [L,R=302]
+    RewriteCond %{QUERY_STRING} author=([0-9]*)
+    RewriteRule .* /? [L,R=302]
 </IfModule>
 
 # Disable cron
@@ -28,16 +43,6 @@ RewriteRule .* /? [L,R=302]
     Order deny,allow
     Deny from all
 </Files>
-
-# Set headers
-Header add X-Frame-Options DENY
-Header add Access-Control-Allow-Origin "https://vin.titanweb.vn"
-
-# Disable directory browsing
-Options -Indexes
-
-# Remove server info when 403
-ErrorDocument 403 /403.html
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
