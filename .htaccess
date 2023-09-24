@@ -22,9 +22,7 @@ Options -Indexes
 ErrorDocument 403 /403.html
 
 # HSTS
-<IfModule mod_headers.c>
-    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
-</IfModule>
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
 
 # Block User ID Phishing Requests
 <IfModule mod_rewrite.c>
