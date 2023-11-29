@@ -1,3 +1,61 @@
+# BEGIN: security rules
+# -----------------------------------------------------
+
+# Disable directory browsing
+Options -Indexes
+
+# Set headers
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options SAMEORIGIN
+# Header always add Access-Control-Allow-Origin "https://elightup.com"
+
+# Remove server info when 403
+# ErrorDocument 403 /403.html
+
+# Block access to XML-RPC
+<Files xmlrpc.php">
+    Order deny,allow
+    Deny from all
+</Files>
+
+# Block access to .htaccess
+<Files .htaccess">
+    Order deny,allow
+    Deny from all
+</Files>
+
+RewriteEngine On
+
+# Block access to sensitive folders
+RewriteRule (^|.*/)\.(\.git|svn|vendors|cache)/.* - [F]
+
+# Disable PHP execution in uploads folder
+RewriteRule ^wp\-content/uploads/.*\.php$ - [F]
+
+# Disable PHP execution in plugins folder
+RewriteRule ^wp\-content/plugins/.*\.php$ - [F]
+
+# Disable PHP execution in themes folder
+RewriteRule ^wp\-content/themes/.*\.php$ - [F]
+
+# Disable PHP execution in wp-admin and wp-includes
+RewriteRule ^wp-admin/includes/ - [F]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F]
+RewriteRule ^wp-includes/theme-compat/ - [F]
+
+# Block author scanning
+RewriteCond %{QUERY_STRING} author=([0-9]*)
+RewriteRule .* /? [L,R=302]
+
+# -----------------------------------------------------
+# END: security rules
+
+# BEGIN: performance rules
+# -----------------------------------------------------
+
 Header unset ETag
 FileETag None
 
@@ -11,36 +69,8 @@ ExpiresByType text/html "access plus 1 day"
     SetOutputFilter DEFLATE
 </FilesMatch>
 
-# Set headers
-Header add X-Frame-Options DENY
-Header add Access-Control-Allow-Origin "https://vin.titanweb.vn"
-
-# Disable directory browsing
-Options -Indexes
-
-# Remove server info when 403
-ErrorDocument 403 /403.html
-
-# HSTS
-Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
-
-# Block User ID Phishing Requests
-<IfModule mod_rewrite.c>
-    RewriteCond %{QUERY_STRING} author=([0-9]*)
-    RewriteRule .* /? [L,R=302]
-</IfModule>
-
-# Disable cron
-<Files wp-cron.php>
-    Order deny,allow
-    Deny from all
-</Files>
-
-# Disable XML-RPC
-<Files xmlrpc.php">
-    Order deny,allow
-    Deny from all
-</Files>
+# -----------------------------------------------------
+# END: Performance rules
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
