@@ -26,3 +26,6 @@ define( 'DISABLE_WP_CRON', true );
 
 // No index.
 define( 'DISALLOW_INDEXING', true );
+
+// Reactivate WordPress Reset plugin.
+define( 'REACTIVATE_WP_RESET', true );
