@@ -1,28 +1,22 @@
 <?php
 function d( ...$args ) {
 	echo '<pre>';
-	foreach ( $args as $arg ) {
-		print_r( $arg );
-	}
+	array_walk( $args, 'print_r' );
 	echo '</pre>';
 }
 
 function dd( ...$args ) {
-	d( ...$args );
-	die;
+	d( ...$args ) && die;
 }
 
 function v( ...$args ) {
 	echo '<pre>';
-	foreach ( $args as $arg ) {
-		var_dump( $arg );
-	}
+	array_walk( $args, 'var_dump' );
 	echo '</pre>';
 }
 
 function vd( ...$args ) {
-	v( ...$args );
-	die;
+	v( ...$args ) && die;
 }
 
 function l( ...$args ) {
@@ -33,12 +27,12 @@ function l( ...$args ) {
 
 function vl( ...$args ) {
 	ob_start();
-	foreach ( $args as $arg ) {
-		var_dump( $arg );
-	}
+	array_walk( $args, 'var_dump' );
 	error_log( ob_get_clean() );
 }
 
-function lqm( $args ) {
-	do_action( 'qm/debug', $args );
+function lqm( ...$args ) {
+	foreach ( $args as $arg ) {
+		do_action( 'qm/debug', $arg );
+	}
 }
