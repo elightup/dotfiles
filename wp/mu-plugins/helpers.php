@@ -1,7 +1,9 @@
 <?php
 function d( ...$args ) {
 	echo '<pre>';
-	array_walk( $args, 'print_r' );
+	foreach ( $args as $arg ) {
+		print_r( $arg );
+	}
 	echo '</pre>';
 }
 
