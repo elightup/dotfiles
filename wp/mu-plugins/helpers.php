@@ -13,7 +13,9 @@ function dd( ...$args ) {
 
 function v( ...$args ) {
 	echo '<pre>';
-	array_walk( $args, 'var_dump' );
+	foreach ( $args as $arg ) {
+		var_dump( $arg );
+	}
 	echo '</pre>';
 }
 
