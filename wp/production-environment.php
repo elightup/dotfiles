@@ -19,8 +19,8 @@ define( 'WP_POST_REVISIONS', false );
 define( 'EMPTY_TRASH_DAYS', 0 );
 
 // Block external requests.
-define( 'WP_HTTP_BLOCK_EXTERNAL', true );
-define( 'WP_ACCESSIBLE_HOSTS', 'api.wordpress.org' );
+// define( 'WP_HTTP_BLOCK_EXTERNAL', true );
+// define( 'WP_ACCESSIBLE_HOSTS', 'api.wordpress.org' );
 
 // Disable updates.
 define( 'AUTOMATIC_UPDATER_DISABLED', true );
