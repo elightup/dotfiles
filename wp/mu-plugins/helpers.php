@@ -8,7 +8,8 @@ function d( ...$args ) {
 }
 
 function dd( ...$args ) {
-	d( ...$args ) && die;
+	d( ...$args );
+	die;
 }
 
 function v( ...$args ) {
@@ -20,7 +21,8 @@ function v( ...$args ) {
 }
 
 function vd( ...$args ) {
-	v( ...$args ) && die;
+	v( ...$args );
+	die;
 }
 
 function l( ...$args ) {
