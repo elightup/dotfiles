@@ -248,9 +248,9 @@ RewriteRule ^wp-includes/[^/]+\.php$ - [F]
 RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F]
 RewriteRule ^wp-includes/theme-compat/ - [F]
 
-# Block author scanning
-RewriteCond %{QUERY_STRING} author=([0-9]*)
-RewriteRule .* /? [L,R=302]
+# Block author scanning. Enable will breack the default WP export functionality.
+# RewriteCond %{QUERY_STRING} author=([0-9]*)
+# RewriteRule .* /? [L,R=302]
 
 # -----------------------------------------------------
 # END: security rules
