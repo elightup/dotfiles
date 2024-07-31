@@ -136,7 +136,7 @@ install() {
 	echo "  - Enabling Apache modules"
 	# -q: Quiet mode.
 	a2enmod -q rewrite expires headers proxy_fcgi setenvif
-	a2enconf -q php8.1-fpm
+	a2enconf -q php8.3-fpm
 
 	echo "  - Restarting Apache"
 	service apache2 restart
