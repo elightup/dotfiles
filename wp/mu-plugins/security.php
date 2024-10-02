@@ -89,6 +89,8 @@ add_action( 'template_redirect', function () {
 	);
 	// Other security headers
 	header( "Strict-Transport-Security: max-age=63072000; includeSubDomains; preload" );
+	header( "Referrer-Policy: no-referrer-when-downgrade" );
+	header( "Permissions-Policy: feature-name=(self)" );
 	// header( "X-Frame-Options: SAMEORIGIN" );
 	// header( "X-Content-Type-Options: nosniff" );
 
