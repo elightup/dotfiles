@@ -5,7 +5,7 @@ define( 'WP_ENVIRONMENT_TYPE', 'local' );
 define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );
 
 // Enable debug mode.
-define( 'WP_DEBUG', true );
+// define( 'WP_DEBUG', true );
 
 // Always log errors.
 define( 'WP_DEBUG_LOG', true );
@@ -29,3 +29,4 @@ define( 'DISALLOW_INDEXING', true );
 
 // Reactivate WordPress Reset plugin.
 define( 'REACTIVATE_WP_RESET', true );
+

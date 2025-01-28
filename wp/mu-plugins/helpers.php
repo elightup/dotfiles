@@ -42,3 +42,11 @@ function lqm( ...$args ) {
 		do_action( 'qm/debug', $arg );
 	}
 }
+
+function once( callable $callback ) {
+	static $run = false;
+	if ( ! $run ) {
+		call_user_func( $callback );
+		$run = true;
+	}
+}
