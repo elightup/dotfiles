@@ -2,10 +2,11 @@
 // Environment type.
 define( 'WP_ENVIRONMENT_TYPE', 'local' );
 
-define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );
+// Development mode: https://make.wordpress.org/core/2023/07/14/configuring-development-mode-in-6-3/
+define( 'WP_DEVELOPMENT_MODE', 'all' );
 
 // Enable debug mode.
-// define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', true );
 
 // Always log errors.
 define( 'WP_DEBUG_LOG', true );
@@ -20,6 +21,9 @@ define( 'CONCATENATE_SCRIPTS', false );
 
 // Save queries for analysis.
 define( 'SAVEQUERIES', true );
+
+// Disable the fatal error handler.
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );
 
 // No crons.
 define( 'DISABLE_WP_CRON', true );
