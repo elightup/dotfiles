@@ -50,3 +50,12 @@ function once( callable $callback ) {
 		$run = true;
 	}
 }
+
+function show_hook_callbacks( string $hook_name, ?int $priority = 10 ): void {
+	global $wp_filter;
+	if ( $priority === null ) {
+		d( $wp_filter[ $hook_name ] );
+	} else {
+		d( $wp_filter[ $hook_name ][ $priority ] );
+	}
+}
