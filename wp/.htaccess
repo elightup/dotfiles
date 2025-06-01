@@ -14,10 +14,7 @@ Header always set X-Frame-Options SAMEORIGIN
 # ErrorDocument 403 /403.html
 
 # Block access to XML-RPC
-<Files xmlrpc.php">
-    Order deny,allow
-    Deny from all
-</Files>
+RedirectMatch 403 /xmlrpc.php
 
 # Block access to .htaccess
 <Files .htaccess">
