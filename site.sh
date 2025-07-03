@@ -111,8 +111,8 @@ install() {
 	echo "  - Installing Git"
 	apt-get install -qqy git
 
-	echo "  - Installing mailutils and unzip"
-	apt-get install -qqy mailutils unzip
+	echo "  - Installing ultilities"
+	apt-get install -qqy mailutils unzip imagemagick
 
 	echo "  - Installing WP-CLI"
 	# -s: Silent mode.
