@@ -97,7 +97,7 @@ install() {
 
 	echo "  - Installing Apache"
 	# -y: Automatic yes to prompts.
-	apt-get install -qqy apache2 libapache2-mod-fcgid
+	apt-get install -qqy apache2 libapache2-mod-fcgid logrotate
 
 	echo "  - Installing MariaDB"
 	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev
