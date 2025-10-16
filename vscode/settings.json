@@ -78,6 +78,9 @@
 	"[json]": {
 		"editor.defaultFormatter": "vscode.json-language-features",
 	},
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"javascript.validate.enable": false,
 	"javascript.suggest.autoImports": true,
 	"javascript.suggestionActions.enabled": true,
 	"javascript.format.semicolons": "insert",
