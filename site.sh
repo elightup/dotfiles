@@ -93,26 +93,26 @@ install() {
 
 	echo "  - Updating the system"
 	# -qq: Don't output anything excepts errors.
-	apt-get -qq update
+	apt-get -qq update > /dev/null
 
 	echo "  - Installing Apache"
 	# -y: Automatic yes to prompts.
-	apt-get install -qqy apache2 libapache2-mod-fcgid logrotate
+	apt-get install -qqy apache2 libapache2-mod-fcgid logrotate > /dev/null
 
 	echo "  - Installing MariaDB"
-	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev
+	apt-get install -qqy mariadb-server mariadb-client libmysqlclient-dev > /dev/null
 
 	echo "  - Installing PHP"
-	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip php-intl
+	apt-get install -qqy php-fpm php-json php-mysqli php-imagick php-curl php-mbstring php-xml php-zip php-intl > /dev/null
 
 	echo "  - Installing Memcached"
-	apt-get install -qqy memcached php-memcached php-memcache
+	apt-get install -qqy memcached php-memcached php-memcache > /dev/null
 
 	echo "  - Installing Git"
-	apt-get install -qqy git
+	apt-get install -qqy git > /dev/null
 
 	echo "  - Installing ultilities"
-	apt-get install -qqy mailutils unzip imagemagick
+	apt-get install -qqy mailutils unzip imagemagick > /dev/null
 
 	echo "  - Installing WP-CLI"
 	# -s: Silent mode.
@@ -123,23 +123,23 @@ install() {
 
 	echo "  - Installing Composer"
 	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-	php composer-setup.php
+	php composer-setup.php > /dev/null
 	php -r "unlink('composer-setup.php');"
 	mv composer.phar /usr/local/bin/composer
 
 	echo "  - Installing Let's Encrypt (Certbot)"
-	snap install core
-	snap refresh core
-	snap install --classic certbot
+	snap install core > /dev/null
+	snap refresh core > /dev/null
+	snap install --classic certbot > /dev/null
 	ln -s /snap/bin/certbot /usr/bin/certbot
 
 	echo "  - Enabling Apache modules"
 	# -q: Quiet mode.
-	a2enmod -q rewrite expires headers proxy_fcgi setenvif ssl
-	a2enconf -q php8.3-fpm
+	a2enmod -q rewrite expires headers proxy_fcgi setenvif ssl > /dev/null
+	a2enconf -q php8.3-fpm > /dev/null
 
 	echo "  - Restarting Apache"
-	service apache2 restart
+	service apache2 restart > /dev/null
 
 	# -e: Enable interpretation of backslash escapes.
 	echo -e "\nDONE"
