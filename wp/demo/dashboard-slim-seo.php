@@ -1,5 +1,5 @@
 <?php
-add_action( 'welcome_panel', function() {
+add_action( 'welcome_panel', function () {
 	?>
 	<div class="welcome-panel-content">
 		<div class="welcome-panel-header">

@@ -6,7 +6,7 @@ add_filter( 'login_errors', function () {
 
 // Restrict file uploads.
 add_filter( 'upload_mimes', function () {
-	return [ 
+	return [
 		'jpg|jpeg' => 'image/jpeg',
 		'gif'      => 'image/gif',
 		'png'      => 'image/png',
@@ -20,7 +20,7 @@ add_filter( 'upload_mimes', function () {
 } );
 
 add_action( 'template_redirect', function () {
-	$scripts = [ 
+	$scripts = [
 		'https://hoalac-school.fpt.edu.vn/',
 		'https://static.cloudflareinsights.com/',
 		'https://googleads.g.doubleclick.net',
@@ -39,16 +39,16 @@ add_action( 'template_redirect', function () {
 		'https://www.google-analytics.com/',
 		'https://www.googleadservices.com',
 	];
-	$style   = [ 
+	$style   = [
 		'https://cdnjs.cloudflare.com ',
 		'https://unpkg.com ',
 		'https://fonts.googleapis.com',
 	];
-	$fonts   = [ 
+	$fonts   = [
 		'https://cdnjs.cloudflare.com/ ',
 		'https://fonts.gstatic.com ',
 	];
-	$img     = [ 
+	$img     = [
 		'https://i.ytimg.com/ ',
 		'https://thpt.fpt.edu.vn/',
 		'https://secure.gravatar.com/',
@@ -65,13 +65,13 @@ add_action( 'template_redirect', function () {
 		'https://googleads.g.doubleclick.net',
 		'https://demo1.elightup.com',
 	];
-	$connect = [ 
+	$connect = [
 		'https://analytics.tiktok.com',
 		'https://api.sbz.vn ',
 		'https://www.google-analytics.com ',
 		'https://analytics.google.com',
 	];
-	$frame   = [ 
+	$frame   = [
 		'https://td.doubleclick.net',
 		'https://web.facebook.com/',
 		'https://www.facebook.com/',
@@ -79,21 +79,20 @@ add_action( 'template_redirect', function () {
 
 	header(
 		"Content-Security-Policy: default-src 'self'; " .
-		"script-src 'self' 'unsafe-inline' " . implode( ' ', $scripts ) . " data:; " .
-		"style-src 'self' 'unsafe-inline' " . implode( ' ', $style ) . "; " .
-		"font-src 'self' " . implode( ' ', $fonts ) . " data:; " .
-		"img-src 'self' " . implode( ' ', $img ) . " data:; " .
-		"connect-src 'self' " . implode( ' ', $connect ) . "; " .
-		"frame-src 'self' " . implode( ' ', $frame ) . ";"
-
+		"script-src 'self' 'unsafe-inline' " . implode( ' ', $scripts ) . ' data:; ' .
+		"style-src 'self' 'unsafe-inline' " . implode( ' ', $style ) . '; ' .
+		"font-src 'self' " . implode( ' ', $fonts ) . ' data:; ' .
+		"img-src 'self' " . implode( ' ', $img ) . ' data:; ' .
+		"connect-src 'self' " . implode( ' ', $connect ) . '; ' .
+		"frame-src 'self' " . implode( ' ', $frame ) . ';'
 	);
 	// Other security headers
-	header( "Strict-Transport-Security: max-age=63072000; includeSubDomains; preload" );
-	header( "Referrer-Policy: no-referrer-when-downgrade" );
-	header( "Permissions-Policy: feature-name=(self)" );
+	header( 'Strict-Transport-Security: max-age=63072000; includeSubDomains; preload' );
+	header( 'Referrer-Policy: no-referrer-when-downgrade' );
+	header( 'Permissions-Policy: feature-name=(self)' );
 	// header( "X-Frame-Options: SAMEORIGIN" );
 	// header( "X-Content-Type-Options: nosniff" );
 
 	// CORS: Be careful with this header, ensure it fits your requirements.
-	header( "Access-Control-Allow-Origin: https://hoalac-school.fpt.edu.vn" );
+	header( 'Access-Control-Allow-Origin: https://hoalac-school.fpt.edu.vn' );
 } );
