@@ -35,12 +35,12 @@ main() {
 
 		# Backup
 		echo "  - Backing up the database $database";
-		file="$folder/$server-$database-$today.sql.gz"
+		file="$folder/$database-$today.sql.gz"
 		$dump -u $user $database | gzip -9 > $file
 
 		# Upload to Dropbox
 		echo "  - Uploading the database $database to Dropbox";
-		upload $file $database.sql.gz
+		upload $file $server-$database.sql.gz
 
 	done
 
