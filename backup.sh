@@ -12,6 +12,7 @@
 
 # The main function
 main() {
+	local server=servername
 	local folder=./backup
 	local today=$(date +%F)
 	local user=root
@@ -34,7 +35,7 @@ main() {
 
 		# Backup
 		echo "  - Backing up the database $database";
-		file="$folder/$database-$today.sql.gz"
+		file="$folder/$server-$database-$today.sql.gz"
 		$dump -u $user $database | gzip -9 > $file
 
 		# Upload to Dropbox
