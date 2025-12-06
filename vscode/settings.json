@@ -1,82 +1,101 @@
 {
-	// Disable telementry.
-	"telemetry.telemetryLevel": "off",
+	"telemetry.telemetryLevel": "off", // Disable telemetry
 
-	// General.
-	"window.zoomLevel": -1,
+	// General
+	"update.showReleaseNotes": false, // Do not show release notes after updating
+	"window.zoomLevel": 0,
 	"security.workspace.trust.untrustedFiles": "open",
-
-	// UI: Minimal.
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
 	"workbench.colorTheme": "Night Owl",
 	"workbench.startupEditor": "none",
-	"workbench.statusBar.visible": false,
+	"window.confirmSaveUntitledWorkspace": false,
+
+	// UI: Minimal
+	// "workbench.statusBar.visible": false,
+	"workbench.activityBar.location": "top",
+	"breadcrumbs.enabled": false,
+	"breadcrumbs.filePath": "off",
 	"editor.minimap.enabled": false,
 	"editor.lineNumbers": "off",
 	"editor.matchBrackets": "near",
 	// "editor.folding": false,
 	"editor.renderLineHighlight": "none",
-	"breadcrumbs.filePath": "off",
-	"explorer.confirmDelete": false,
-	"explorer.confirmDragAndDrop": false,
-	"breadcrumbs.enabled": false,
+	"editor.scrollbar.vertical": "hidden",
+	"editor.scrollbar.horizontal": "hidden",
+	"editor.overviewRulerBorder": false, // remove border from overview ruler (located on the right, same position as the scrollbar)
+	"editor.hideCursorInOverviewRuler": true, // hide cursor mark in the overview ruler
+	"editor.glyphMargin": false, // remove the space used mainly for debugging indicators
+	"editor.guides.indentation": false, // hide indent guides
+	"files.simpleDialog.enable": true, // minimal UI for open files/folder with Cmd+Oo
 
-	// UI: Sidebar.
+	// UI: Sidebar
 	"workbench.sideBar.location": "right",
 	"workbench.tree.indent": 16,
 
-	// Terminal.
-	"terminal.integrated.profiles.osx": {
-		"zsh": {
-			"path": "zsh",
-			"args": [
-				"-l"
-			]
-		}
-	},
+	// Terminal
 	"terminal.integrated.defaultProfile.osx": "zsh",
+	"terminal.integrated.defaultProfile.windows": "Git Bash",
 
-	// Editor: save.
-	"files.autoSave": "onFocusChange",
-	"files.trimTrailingWhitespace": true,
-
-	// Editor: font.
-	"editor.fontFamily": "Fira Code",
-	"editor.fontLigatures": true,
-	"editor.fontSize": 14,
-	"editor.lineHeight": 1.6,
-
-	// Editor: select words.
+	// Editor
+	"files.autoSave": "afterDelay",
+	"editor.gotoLocation.multipleDefinitions": "goto",
 	"editor.wordSeparators": "`~!@%^&*()=+[{]}\\|;:'\",.<>/?",
 
-	// Format.
+	// Font
+	"editor.fontFamily": "Fira Code",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 18,
+	"editor.lineHeight": 1.8,
+
+	// Format
 	"files.eol": "\n",
+	"files.trimTrailingWhitespace": true,
 	"editor.insertSpaces": false,
 	"editor.showUnused": true,
-	"editor.formatOnType": true,
 
-	// Format: PHP.
+
+	"workbench.editorAssociations": {
+		"*.svg": "default"
+	},
+
+	// HTML
+	"html.format.wrapLineLength": 0,
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features",
+	},
+
+	// PHP
 	"[php]": {
-		"editor.defaultFormatter": "wongjn.php-sniffer"
+		"editor.defaultFormatter": "DEVSENSE.phptools-vscode"
 	},
+	"php.format.codeStyle": "WordPress",
+	"php.workspace.includePath": "/Users/rilwis/sites/wp/",
 
-	// Format: SCSS.
+	// SCSS
 	"[scss]": {
-		"editor.defaultFormatter": "HookyQR.beautify"
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
 	},
 
-	// Format: JavaScript, Typescript, JSON, JSX.
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "always",
-		"source.organizeImports": "always",
-	},
-	"javascript.preferences.importModuleSpecifier": "relative",
-	"javascript.updateImportsOnFileMove.enabled": "always",
-	"javascript.validate.enable": false,
+	// JavaScript, Typescript, JSON, JSX
 	"[javascript]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features",
 	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
 	"[json]": {
-		"editor.defaultFormatter": "vscode.json-language-features",
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit"
 	},
 	"javascript.preferences.importModuleSpecifier": "relative",
 	"javascript.updateImportsOnFileMove.enabled": "always",
@@ -96,19 +115,24 @@
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
 
-	// Git.
+	// Git
 	"git.enableSmartCommit": true,
-	"git.confirmSync": false, // For Windows
-	"git.ignoreMissingGitWarning": true,
-	"diffEditor.renderSideBySide": false,
-	"scm.diffDecorationsIgnoreTrimWhitespace": "true",
+	"git.confirmSync": false,
+	"git.replaceTagsWhenPull": true,
+	"git.openRepositoryInParentFolders": "never",
+	"diffEditor.ignoreTrimWhitespace": true,
+	"diffEditor.maxComputationTime": 0,
 
-	// Git: Gitlens.
-	"gitlens.codeLens.enabled": false,
-	"gitlens.hovers.enabled": false,
+	"githubPullRequests.pullBranch": "never",
+	"githubPullRequests.pushBranch": "always",
+	"githubPullRequests.createOnPublishBranch": "never",
+
+	// Gitlens
 	"gitlens.views.commits.showBranchComparison": false,
-	"gitlens.advanced.messages": {
-		"suppressCreatePullRequestPrompt": true,
-		"suppressGitMissingWarning": true
+	"gitlens.views.commits.pullRequests.enabled": false,
+	"gitlens.hovers.currentLine.over": "line",
+
+	"tailwindCSS.includeLanguages": {
+		"php": "html"
 	},
 }

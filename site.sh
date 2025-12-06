@@ -112,7 +112,7 @@ install() {
 	apt-get install -qqy git > /dev/null
 
 	echo "  - Installing ultilities"
-	apt-get install -qqy mailutils unzip imagemagick > /dev/null
+	apt-get install -qqy mailutils unzip imagemagick goaccess > /dev/null
 
 	echo "  - Installing WP-CLI"
 	# -s: Silent mode.
