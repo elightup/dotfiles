@@ -1,0 +1,13 @@
+{
+    "core": "WordPress/WordPress#6.9",
+    "phpVersion": "8.5",
+    "port": 8888,
+    "env": {
+        "tests": {
+            "port": 8889
+        }
+    },
+	"mappings": {
+        "wp-content": "/Users/rilwis/sites/wp/wp-content"
+    }
+}
